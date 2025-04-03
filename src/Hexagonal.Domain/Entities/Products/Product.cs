@@ -1,0 +1,52 @@
+﻿using FluentValidation.Results;
+using Hexagonal.Domain.Entities.Comums;
+using Hexagonal.Domain.Enums;
+
+namespace Hexagonal.Domain.Entities.Products;
+
+public sealed class Product
+{
+    public required Guid Id { get; init; }
+    public string Name { get; private set; } = string.Empty;
+    public Status Status { get; private set; }
+    public decimal Price { get; private set; }
+
+    public static Product Create(Guid id, string name, decimal price) => new()
+    {
+        Id = id,
+        Name = name,
+        Price = price,
+    };
+    public void Update(string name, Status status, decimal price)
+    {
+        Name = name;
+        Status = status;
+        Price = price;
+    }
+
+    public void ChangePrice(decimal price)
+    {
+        if(price < 0)
+            throw new UserException("Price cannot be negative");
+        Price = price;
+    }
+    public void Enable()
+    {
+        if(Price <= 0)
+            throw new UserException("Price cannot be zero or negative");
+        
+        Status = Status.Enabled;
+    }
+    public void Disable()
+    {
+        if(Price > 0)
+            throw new UserException("Price must to be zero or negative to Disable");
+        
+        Status = Status.Disabled;
+    }
+    public ValidationResult IsValid()
+    {
+        var productValidator = new ProductValidator();
+        return productValidator.Validate(this);
+    }
+}
