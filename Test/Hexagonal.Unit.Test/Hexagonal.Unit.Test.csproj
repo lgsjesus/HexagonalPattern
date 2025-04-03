@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Hexagonal.Domain\Hexagonal.Domain.csproj" />
+      <ProjectReference Include="..\..\src\Hexagonal.Services\Hexagonal.Services.csproj" />
     </ItemGroup>
 
 </Project>
