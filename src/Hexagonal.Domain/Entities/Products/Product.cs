@@ -33,14 +33,14 @@ public sealed class Product
     public void Enable()
     {
         if(Price <= 0)
-            throw new UserException("Price cannot be zero or negative");
+            throw new UserException("Price must be positive");
         
         Status = Status.Enabled;
     }
     public void Disable()
     {
         if(Price > 0)
-            throw new UserException("Price must to be zero or negative to Disable");
+            throw new UserException("Price must be zero or negative");
         
         Status = Status.Disabled;
     }

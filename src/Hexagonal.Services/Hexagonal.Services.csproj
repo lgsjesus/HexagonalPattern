@@ -4,12 +4,11 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>Hexagonal.ProductService</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FakeItEasy" Version="8.3.0" />
-      <PackageReference Include="FluentValidation" Version="11.11.0" />
-      <PackageReference Include="Optional" Version="4.0.0" />
+      <ProjectReference Include="..\Hexagonal.Domain\Hexagonal.Domain.csproj" />
     </ItemGroup>
 
 </Project>
