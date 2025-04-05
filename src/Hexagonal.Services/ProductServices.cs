@@ -8,7 +8,8 @@ public sealed class ProductServices(IProductWriteRepository productWriteReposito
 {
     public Product GetProductById(Guid id)
     {
-      return productWriteRepository.GetById(id).Match(some: product => product,
+        var item = Task.Run(async () => await productWriteRepository.GetProduct(id)).Result;
+      return item.Match(some: product => product,
           none: () => throw new UserException("Product not found"));
     }
     public Product Create(string name, decimal price, Status status)
