@@ -4,9 +4,9 @@ using Hexagonal.Domain.Enums;
 
 namespace Hexagonal.Domain.Entities.Products;
 
-public sealed class Product
+public sealed class Product : Entity<Guid>
 {
-    public required Guid Id { get; init; }
+    public new required Guid Id { get; init; }
     public string Name { get; private set; } = string.Empty;
     public Status Status { get; private set; }
     public decimal Price { get; private set; }

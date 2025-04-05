@@ -4,6 +4,6 @@ namespace Hexagonal.Domain.Entities.Products;
 
 public interface IProductWriteRepository
 {
-    Product Save(Product product);
-    Option<Product> GetById(Guid id);
+    Task<Product> Save(Product product);
+    Task<Option<Product>> GetProduct(Guid productId);
 }

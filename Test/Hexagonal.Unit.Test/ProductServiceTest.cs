@@ -23,7 +23,7 @@ public class ProductServiceTest
     {
         var id = Guid.NewGuid();
         var product = Product.Create(id, "Test", 12);
-        A.CallTo(()=> _repository.GetById(A<Guid>._))
+        A.CallTo(()=> _repository.GetProduct(A<Guid>._))
             .Returns(  Option.Some<Product>(product));
         
         _service.GetProductById(id).Should().BeEquivalentTo(product);
@@ -32,7 +32,7 @@ public class ProductServiceTest
     public void GetById_ProductNotExists_ReturnsProduct()
     {
         var id = Guid.NewGuid();
-        A.CallTo(()=> _repository.GetById(id))
+        A.CallTo(()=> _repository.GetProduct(id))
             .Returns(  Option.None<Product>());
         Action check = () => _service.GetProductById(id);
         //Assert
@@ -59,7 +59,7 @@ public class ProductServiceTest
     {
         var id = Guid.NewGuid();
         var product = Product.Create(id, "Test", 12);
-        A.CallTo(()=> _repository.GetById(A<Guid>._))
+        A.CallTo(()=> _repository.GetProduct(A<Guid>._))
             .Returns(  Option.Some<Product>(product));
 
         Action check = () => _service.Enable(product);
@@ -70,7 +70,7 @@ public class ProductServiceTest
     {
         var id = Guid.NewGuid();
         var product = Product.Create(id, "Test", 0);
-        A.CallTo(()=> _repository.GetById(A<Guid>._))
+        A.CallTo(()=> _repository.GetProduct(A<Guid>._))
             .Returns(  Option.Some<Product>(product));
 
         Action check = () => _service.Enable(product);
@@ -81,7 +81,7 @@ public class ProductServiceTest
     {
         var id = Guid.NewGuid();
         var product = Product.Create(id, "Test", 0);
-        A.CallTo(()=> _repository.GetById(A<Guid>._))
+        A.CallTo(()=> _repository.GetProduct(A<Guid>._))
             .Returns(  Option.Some<Product>(product));
 
         Action check = () => _service.Disable(product);
@@ -93,7 +93,7 @@ public class ProductServiceTest
     {
         var id = Guid.NewGuid();
         var product = Product.Create(id, "Test", 15);
-        A.CallTo(()=> _repository.GetById(A<Guid>._))
+        A.CallTo(()=> _repository.GetProduct(A<Guid>._))
             .Returns(  Option.Some<Product>(product));
 
         Action check = () => _service.Disable(product);
