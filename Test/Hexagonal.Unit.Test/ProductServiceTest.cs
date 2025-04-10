@@ -22,7 +22,7 @@ public class ProductServiceTest
     public async Task GetById_ProductExists_ReturnsProduct()
     {
         var id = Guid.NewGuid();
-        var product = Product.Create(id, "Test", 12);
+        var product = Product.CreateDisable(id, "Test", 12);
         A.CallTo(()=> _repository.GetProduct(A<Guid>._))
             .Returns(  Option.Some(product));
 
@@ -37,22 +37,22 @@ public class ProductServiceTest
             .Returns(  Option.None<Product>());
         Func<Task> check = async () => await _service.GetProductById(id);
         //Assert
-       await check.Should().ThrowAsync<UserException>("Product not found");
+       await check.Should().ThrowAsync<UserException>().WithMessage("Product not found");
     }
     [Fact]
     public async Task Save_ProductPriceZero_ReturnsError()
     {
-        var product = Product.Create(Guid.NewGuid(), "Test", 0);
-        A.CallTo(() => _repository.Save(product)).Returns(product);
+        var product = Product.CreateDisable(Guid.NewGuid(), "Test", 0);
+        A.CallTo(() => _repository.SaveProduct(product)).Returns(product);
         Func<Task> check = async () => await  _service.Create(product.Name,product.Price, Status.Enabled);
         //Assert
-        await check.Should().ThrowAsync<UserException>("Price must be positive");
+        await check.Should().ThrowAsync<UserException>().WithMessage("Price must be positive");
     }
     [Fact]
     public async Task Save_ProductPriceGreatherZero_ReturnsSuccess()
     {
-        var product = Product.Create(Guid.NewGuid(), "Test", 15);
-        A.CallTo(() => _repository.Save(product)).Returns(product);
+        var product = Product.CreateDisable(Guid.NewGuid(), "Test", 15);
+        A.CallTo(() => _repository.SaveProduct(product)).Returns(product);
         Func<Task> check = async () => await  _service.Create("Test", 15, Status.Enabled);
         await check.Should().NotThrowAsync();
     }
@@ -60,7 +60,7 @@ public class ProductServiceTest
     public async Task Enable_ProductPriceGreatherZero_ReturnsSuccess()
     {
         var id = Guid.NewGuid();
-        var product = Product.Create(id, "Test", 12);
+        var product = Product.CreateDisable(id, "Test", 12);
         A.CallTo(()=> _repository.GetProduct(A<Guid>._))
             .Returns(  Option.Some(product));
 
@@ -71,18 +71,18 @@ public class ProductServiceTest
     public async Task Enable_ProductPriceZero_ReturnsError()
     {
         var id = Guid.NewGuid();
-        var product = Product.Create(id, "Test", 0);
+        var product = Product.CreateDisable(id, "Test", 0);
         A.CallTo(()=> _repository.GetProduct(A<Guid>._))
             .Returns(  Option.Some(product));
 
         Func<Task> check = async () => await _service.Enable(product);
-        await check.Should().ThrowAsync<UserException>("Price cannot be zero or negative");
+        await check.Should().ThrowAsync<UserException>().WithMessage("Price must be positive");
     }
     [Fact]
     public async Task Disable_ProductPriceZero_ReturnsSuccess()
     {
         var id = Guid.NewGuid();
-        var product = Product.Create(id, "Test", 0);
+        var product = Product.CreateDisable(id, "Test", 0);
         A.CallTo(()=> _repository.GetProduct(A<Guid>._))
             .Returns(  Option.Some(product));
 
@@ -94,11 +94,28 @@ public class ProductServiceTest
     public async Task Disable_ProductPriceGreatherZero_ReturnsError()
     {
         var id = Guid.NewGuid();
-        var product = Product.Create(id, "Test", 15);
+        var product = Product.CreateDisable(id, "Test", 15);
         A.CallTo(()=> _repository.GetProduct(A<Guid>._))
             .Returns(  Option.Some(product));
 
         Func<Task> check = async () =>await _service.Disable(product);
-       await check.Should().ThrowAsync<UserException>("Price must to be zero or negative to Disable");
+       await check.Should().ThrowAsync<UserException>().WithMessage("Price must be zero or negative");
+    }
+    
+    [Fact]
+    public async Task Update_ProductPriceZeroAndEnable_ReturnsError()
+    {
+        var product = Product.Create(Guid.NewGuid(), "Test", 0,Status.Enabled);
+        A.CallTo(() => _repository.UpdateProduct(product)).Returns(product);
+        Func<Task> check = async () => await  _service.Update(Guid.NewGuid(), "Test", 0,Status.Enabled);
+        //Assert
+        await check.Should().ThrowAsync<UserException>().WithMessage("Price must be positive");
+    }
+    [Fact]
+    public async Task Update_ProductPriceZeroAndDisable_ReturnsError()
+    {
+        Func<Task> check = async () => await  _service.Update(Guid.NewGuid(), "Test", 10,Status.Disabled);
+        //Assert
+        await check.Should().ThrowAsync<UserException>().WithMessage("Price must be zero or negative");
     }
 }

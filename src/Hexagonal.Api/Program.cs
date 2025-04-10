@@ -1,3 +1,4 @@
+using System.Reflection;
 using Hexagonal.Api.Controllers.Dtos;
 using Hexagonal.Domain.Entities.Products;
 using Hexagonal.EntityFramework;
@@ -18,7 +19,12 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProductService, ProductServices>();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Hexagonal", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Hexagonal", Version = "v1",
+        Contact = new OpenApiContact
+        {
+            Name = "Developer Name",
+            Email = "dev@example.com"
+        } });
 });
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -41,10 +47,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => 
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-    });
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
@@ -52,4 +55,4 @@ app.MapControllers();
 app.UseRouting();
 
 
-await app.RunAsync();
+app.Run();

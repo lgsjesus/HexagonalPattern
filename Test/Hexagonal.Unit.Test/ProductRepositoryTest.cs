@@ -30,18 +30,18 @@ public sealed class ProductRepositoryTest : IDisposable
     [Fact]
     public async Task TestAddProductAsync()
     {
-        var product = Product.Create(Guid.Empty, "Product 1",15);
+        var product = Product.CreateDisable(Guid.Empty, "Product 1",15);
         product.Enable();
-        var result = await _productRepository.Save(product);
+        var result = await _productRepository.SaveProduct(product);
         result.Id.Should().NotBeEmpty();
     }
     [Fact]
     public async Task TestIfGetProductAfterSaveAsync()
     {
-        var product = Product.Create(Guid.Empty, "Product 1",15);
+        var product = Product.CreateDisable(Guid.Empty, "Product 1",15);
         product.Enable();
-        var result = await _productRepository.Save(product);
-        var queryProduct = (await _productRepository.GetProduct(result.Id)).ValueOr( Product.Create(Guid.Empty, "Product 2",15) );
+        var result = await _productRepository.SaveProduct(product);
+        var queryProduct = (await _productRepository.GetProduct(result.Id)).ValueOr( Product.CreateDisable(Guid.Empty, "Product 2",15) );
        
         Assert.Equal(result.Id,queryProduct.Id);
         Assert.Equal(result.Name,queryProduct.Name);

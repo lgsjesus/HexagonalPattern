@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hexagonal.Api.Controllers;
 
 [Route("api/[controller]")]
-public sealed class ProductController(IProductService service) : ApiBaseController
+[ApiController]
+public class ProductController(IProductService service) : ControllerBase
 {
     [HttpGet("GetAll")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -22,5 +23,11 @@ public sealed class ProductController(IProductService service) : ApiBaseControll
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ProductDto> CreateProduct(ProductDto dto)
+        => await service.Create(dto.Name, dto.Price, dto.Status);
+    
+    [HttpPut("Update")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ProductDto> UpdateProduct(ProductDto dto)
         => await service.Create(dto.Name, dto.Price, dto.Status);
 }

@@ -20,7 +20,7 @@ public sealed class ProductServices(IProductRepository productRepository) : IPro
 
     public async Task<Product> Create(string name, decimal price, Status status)
     {
-        var produto = Product.Create(Guid.NewGuid(), name, price);
+        var produto = Product.CreateDisable(Guid.NewGuid(), name, price);
         if (status == Status.Enabled)
             produto.Enable();
         else
@@ -29,7 +29,20 @@ public sealed class ProductServices(IProductRepository productRepository) : IPro
         var result = produto.IsValid();
         if (result.IsValid)
         {
-            await productRepository.Save(produto);
+            await productRepository.SaveProduct(produto);
+            return produto;
+        }
+        throw new UserException( result.Errors.
+            Select(c=> c.ErrorMessage).CommAggregate());
+    }
+
+    public async Task<Product> Update(Guid id, string name, decimal price, Status status)
+    {
+        var produto = Product.Create(id, name, price, status);
+        var result = produto.IsValid();
+        if (result.IsValid)
+        {
+            await productRepository.UpdateProduct(produto);
             return produto;
         }
         throw new UserException( result.Errors.
@@ -42,7 +55,7 @@ public sealed class ProductServices(IProductRepository productRepository) : IPro
         var result = productExistente.IsValid();
         if (result.IsValid)
         {
-            await productRepository.Save(productExistente);
+            await productRepository.SaveProduct(productExistente);
             return;
         }
         
@@ -56,7 +69,7 @@ public sealed class ProductServices(IProductRepository productRepository) : IPro
         var result = productExistente.IsValid();
         if (result.IsValid)
         {
-            await productRepository.Save(productExistente);
+            await productRepository.SaveProduct(productExistente);
             return;
         }
         throw new UserException( result.Errors.

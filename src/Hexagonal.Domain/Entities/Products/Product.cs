@@ -11,11 +11,12 @@ public sealed class Product : Entity<Guid>
     public Status Status { get; private set; }
     public decimal Price { get; private set; }
 
-    public static Product Create(Guid id, string name, decimal price) => new()
+    public static Product CreateDisable(Guid id, string name, decimal price) => new()
     {
         Id = id,
         Name = name,
-        Price = price
+        Price = price,
+        Status = Status.Disabled
     };
     public static Product Create(Guid id, string name, decimal price,Status status) => new()
     {

@@ -8,6 +8,7 @@ public interface IProductService
     Task<Product> GetProductById(Guid id);
     Task<ReadOnlyCollection<Product>> GetAllProducts();
     Task<Product> Create(string name,decimal price,Status status);
+    Task<Product> Update(Guid id, string name,decimal price,Status status);
     Task Enable(Product product);
     Task Disable(Product product);
 }

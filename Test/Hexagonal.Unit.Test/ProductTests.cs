@@ -10,7 +10,7 @@ public class ProductTests
     [Fact]
     public void TestProductEnableWithSucced()
     {
-        var product = Product.Create(Guid.NewGuid(), "Product 1", (decimal) 15.56);
+        var product = Product.CreateDisable(Guid.NewGuid(), "Product 1", (decimal) 15.56);
         Action check = () => product.Enable();
         //Assert
         check.Should().NotThrow();
@@ -19,7 +19,7 @@ public class ProductTests
     [Fact]
     public void TestProductEnableWithErrorPriceZero()
     {
-        var product = Product.Create(Guid.NewGuid(), "Product 1", -5);
+        var product = Product.CreateDisable(Guid.NewGuid(), "Product 1", -5);
         Action check = () => product.Enable();
         //Assert
         check.Should().Throw<UserException>("Price cannot be zero or negative");
@@ -27,7 +27,7 @@ public class ProductTests
     [Fact]
     public void TestProductIsValidWithSucceced()
     {
-        var product = Product.Create(Guid.NewGuid(), "Product 1", 15);
+        var product = Product.CreateDisable(Guid.NewGuid(), "Product 1", 15);
         product.Enable();
         var valid = product.IsValid();
         //Assert
@@ -36,7 +36,7 @@ public class ProductTests
     [Fact]
     public void TestProductNotIsValidWithoutName()
     {
-        var product = Product.Create(Guid.NewGuid(), string.Empty, 15);
+        var product = Product.CreateDisable(Guid.NewGuid(), string.Empty, 15);
         product.Enable();
         var valid = product.IsValid();
         //Assert
@@ -45,7 +45,7 @@ public class ProductTests
     [Fact]
     public void TestProductNotIsValidWithoutId()
     {
-        var product = Product.Create(Guid.Empty, "product 1", 15);
+        var product = Product.CreateDisable(Guid.Empty, "product 1", 15);
         product.Enable();
         var valid = product.IsValid();
         //Assert
