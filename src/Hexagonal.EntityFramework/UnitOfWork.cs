@@ -3,7 +3,7 @@ using Hexagonal.Domain.Entities.Comums;
 
 namespace Hexagonal.EntityFramework;
 
-public class UnitOfWork(IDbContext context) : IUnitOfWork
+public class UnitOfWork(HexagonalDbContext context) : IUnitOfWork
 {
     private bool _disposed = false;
 

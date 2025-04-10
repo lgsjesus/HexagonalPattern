@@ -38,7 +38,7 @@ public class Repository<TEntity, TId>(HexagonalDbContext context, IUnitOfWork un
 
     public async Task<Option<TEntity>> Create(TEntity entity)
     {
-        DbSet.Add(entity);
+        context.Set<TEntity>().Add(entity);
         return await unitOfWork.Commit() ? Option.Some(entity) : Option.None<TEntity>();
     }
 }
