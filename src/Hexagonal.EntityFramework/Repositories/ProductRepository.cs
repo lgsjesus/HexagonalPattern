@@ -1,11 +1,12 @@
-﻿using Hexagonal.Domain.Entities.Comums;
+﻿using System.Collections.ObjectModel;
+using Hexagonal.Domain.Entities.Comums;
 using Hexagonal.Domain.Entities.Products;
 using Optional;
 
 namespace Hexagonal.EntityFramework.Repositories;
 
 public sealed class ProductRepository(HexagonalDbContext context, IUnitOfWork unitOfWork) 
-    : Repository<Product, Guid>(context,unitOfWork), IProductWriteRepository
+    : Repository<Product, Guid>(context,unitOfWork), IProductRepository
 {
     public async  Task<Product> Save(Product product)
     {
@@ -22,4 +23,7 @@ public sealed class ProductRepository(HexagonalDbContext context, IUnitOfWork un
     {
         return await GetById(productId);
     }
+
+    public async Task<Option<ReadOnlyCollection<Product>>> GetAllProduct()
+    => await GetAll();
 }

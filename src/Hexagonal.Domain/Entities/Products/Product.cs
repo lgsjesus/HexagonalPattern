@@ -15,7 +15,14 @@ public sealed class Product : Entity<Guid>
     {
         Id = id,
         Name = name,
+        Price = price
+    };
+    public static Product Create(Guid id, string name, decimal price,Status status) => new()
+    {
+        Id = id,
+        Name = name,
         Price = price,
+        Status = status
     };
     public void Update(string name, Status status, decimal price)
     {

@@ -5,8 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hexagonal.EntityFramework;
 
-public class HexagonalDbContext(DbContextOptions options) : DbContext(options) 
+public class HexagonalDbContext(DbContextOptions options): DbContext(options)
 {
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseMySql(new MySqlServerVersion("5.7"));
+    }
+
     public DbSet<Product> Product { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

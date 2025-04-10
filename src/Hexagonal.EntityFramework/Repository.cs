@@ -1,4 +1,5 @@
-﻿using Hexagonal.Domain.Entities.Comums;
+﻿using System.Collections.ObjectModel;
+using Hexagonal.Domain.Entities.Comums;
 using Microsoft.EntityFrameworkCore;
 using Optional;
 
@@ -40,5 +41,11 @@ public class Repository<TEntity, TId>(HexagonalDbContext context, IUnitOfWork un
     {
         context.Set<TEntity>().Add(entity);
         return await unitOfWork.Commit() ? Option.Some(entity) : Option.None<TEntity>();
+    }
+
+    public async Task<Option<ReadOnlyCollection<TEntity>>> GetAll()
+    {
+        var items = await DbSet.ToListAsync();
+        return items.Any() ? Option.Some(items.AsReadOnly()) : Option.None<ReadOnlyCollection<TEntity>>();
     }
 }

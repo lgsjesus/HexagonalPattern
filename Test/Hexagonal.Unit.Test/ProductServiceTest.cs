@@ -11,92 +11,94 @@ namespace Hexagonal.Unit.Test;
 public class ProductServiceTest
 {
     private readonly IProductService _service;
-    private readonly IProductWriteRepository _repository;
+    private readonly IProductRepository _repository;
     public ProductServiceTest()
     {
-        _repository = A.Fake<IProductWriteRepository>();
+        _repository = A.Fake<IProductRepository>();
         _service = new ProductServices(_repository);
     }
 
     [Fact]
-    public void GetById_ProductExists_ReturnsProduct()
+    public async Task GetById_ProductExists_ReturnsProduct()
     {
         var id = Guid.NewGuid();
         var product = Product.Create(id, "Test", 12);
         A.CallTo(()=> _repository.GetProduct(A<Guid>._))
-            .Returns(  Option.Some<Product>(product));
-        
-        _service.GetProductById(id).Should().BeEquivalentTo(product);
+            .Returns(  Option.Some(product));
+
+        var resultProduct = await _service.GetProductById(id);
+        resultProduct.Should().BeEquivalentTo(product);
     }
     [Fact]
-    public void GetById_ProductNotExists_ReturnsProduct()
+    public async Task GetById_ProductNotExists_ReturnsProduct()
     {
         var id = Guid.NewGuid();
         A.CallTo(()=> _repository.GetProduct(id))
             .Returns(  Option.None<Product>());
-        Action check = () => _service.GetProductById(id);
+        Func<Task> check = async () => await _service.GetProductById(id);
         //Assert
-        check.Should().Throw<UserException>("Product not found");
+       await check.Should().ThrowAsync<UserException>("Product not found");
     }
     [Fact]
-    public void Save_ProductPriceZero_ReturnsError()
+    public async Task Save_ProductPriceZero_ReturnsError()
     {
         var product = Product.Create(Guid.NewGuid(), "Test", 0);
         A.CallTo(() => _repository.Save(product)).Returns(product);
-        Action check = () => _service.Create(product.Name,product.Price, Status.Enabled);
+        Func<Task> check = async () => await  _service.Create(product.Name,product.Price, Status.Enabled);
         //Assert
-        check.Should().Throw<UserException>("Price must be positive");
+        await check.Should().ThrowAsync<UserException>("Price must be positive");
     }
     [Fact]
-    public void Save_ProductPriceGreatherZero_ReturnsSuccess()
+    public async Task Save_ProductPriceGreatherZero_ReturnsSuccess()
     {
         var product = Product.Create(Guid.NewGuid(), "Test", 15);
         A.CallTo(() => _repository.Save(product)).Returns(product);
-       _service.Create("Test", 15, Status.Enabled).Should().BeOfType<Product>();
+        Func<Task> check = async () => await  _service.Create("Test", 15, Status.Enabled);
+        await check.Should().NotThrowAsync();
     }
     [Fact]
-    public void Enable_ProductPriceGreatherZero_ReturnsSuccess()
+    public async Task Enable_ProductPriceGreatherZero_ReturnsSuccess()
     {
         var id = Guid.NewGuid();
         var product = Product.Create(id, "Test", 12);
         A.CallTo(()=> _repository.GetProduct(A<Guid>._))
-            .Returns(  Option.Some<Product>(product));
+            .Returns(  Option.Some(product));
 
-        Action check = () => _service.Enable(product);
-        check.Should().NotThrow();
+        Func<Task> check = async () => await  _service.Enable(product);
+        await check.Should().NotThrowAsync();
     }
     [Fact]
-    public void Enable_ProductPriceZero_ReturnsError()
+    public async Task Enable_ProductPriceZero_ReturnsError()
     {
         var id = Guid.NewGuid();
         var product = Product.Create(id, "Test", 0);
         A.CallTo(()=> _repository.GetProduct(A<Guid>._))
-            .Returns(  Option.Some<Product>(product));
+            .Returns(  Option.Some(product));
 
-        Action check = () => _service.Enable(product);
-        check.Should().Throw<UserException>("Price cannot be zero or negative");
+        Func<Task> check = async () => await _service.Enable(product);
+        await check.Should().ThrowAsync<UserException>("Price cannot be zero or negative");
     }
     [Fact]
-    public void Disable_ProductPriceZero_ReturnsSuccess()
+    public async Task Disable_ProductPriceZero_ReturnsSuccess()
     {
         var id = Guid.NewGuid();
         var product = Product.Create(id, "Test", 0);
         A.CallTo(()=> _repository.GetProduct(A<Guid>._))
-            .Returns(  Option.Some<Product>(product));
+            .Returns(  Option.Some(product));
 
-        Action check = () => _service.Disable(product);
-        check.Should().NotThrow();
+        Func<Task> check = async () => await _service.Disable(product);
+        await check.Should().NotThrowAsync();
         
     }
     [Fact]
-    public void Disable_ProductPriceGreatherZero_ReturnsError()
+    public async Task Disable_ProductPriceGreatherZero_ReturnsError()
     {
         var id = Guid.NewGuid();
         var product = Product.Create(id, "Test", 15);
         A.CallTo(()=> _repository.GetProduct(A<Guid>._))
-            .Returns(  Option.Some<Product>(product));
+            .Returns(  Option.Some(product));
 
-        Action check = () => _service.Disable(product);
-        check.Should().Throw<UserException>("Price must to be zero or negative to Disable");
+        Func<Task> check = async () =>await _service.Disable(product);
+       await check.Should().ThrowAsync<UserException>("Price must to be zero or negative to Disable");
     }
 }
