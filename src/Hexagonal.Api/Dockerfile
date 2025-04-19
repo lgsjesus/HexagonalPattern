@@ -7,10 +7,14 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Hexagonal.Api/Hexagonal.Api.csproj", "src/Hexagonal.Api/"]
-RUN dotnet restore "src/Hexagonal.Api/Hexagonal.Api.csproj"
+COPY ["./Hexagonal.Api/Hexagonal.Api.csproj", "./Hexagonal.Api/"]
+COPY ["./Hexagonal.Domain/Hexagonal.Domain.csproj", "./Hexagonal.Domain/"]
+COPY ["./Hexagonal.Services/Hexagonal.Services.csproj", "./Hexagonal.Services/"]
+COPY ["./Hexagonal.EntityFramework/Hexagonal.EntityFramework.csproj", "./Hexagonal.EntityFramework/"]
+
+RUN dotnet restore "./Hexagonal.Api/Hexagonal.Api.csproj"
 COPY . .
-WORKDIR "/src/src/Hexagonal.Api"
+WORKDIR "./Hexagonal.Api"
 RUN dotnet build "Hexagonal.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

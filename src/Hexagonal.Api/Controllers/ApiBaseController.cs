@@ -4,12 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hexagonal.Api.Controllers;
 
+[Route("api/[controller]")]
 public abstract class ApiBaseController : ControllerBase
 {
-    public IActionResult HandleResponse([NotNull] Response response)
+    protected  IActionResult HandleResponse(object? retorno) 
     {
-        if (response.Success)
-            return Ok(response);
-        return BadRequest(response);
+        try
+        {
+            return Ok(ApiResponse.CreateSuccess(retorno));
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ApiResponse.CreateError(ex.Message));
+        }
     }
 }

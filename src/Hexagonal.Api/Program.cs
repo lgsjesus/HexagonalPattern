@@ -1,5 +1,6 @@
 using System.Reflection;
 using Hexagonal.Api.Controllers.Dtos;
+using Hexagonal.Api.Extensions;
 using Hexagonal.Domain.Entities.Products;
 using Hexagonal.EntityFramework;
 using Hexagonal.EntityFramework.Repositories;
@@ -44,15 +45,17 @@ builder.Services.AddDbContext<HexagonalDbContext>(
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseRouting();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 
 app.Run();

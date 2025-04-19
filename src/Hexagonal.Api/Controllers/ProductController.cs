@@ -6,28 +6,28 @@ namespace Hexagonal.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ProductController(IProductService service) : ControllerBase
+public class ProductController(IProductService service) : ApiBaseController
 {
     [HttpGet("GetAll")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IEnumerable<ProductDto>> GetAllProduct()
-        => (await service.GetAllProducts())
-            .Select(c => (ProductDto) c).AsEnumerable();
+    public async Task<IActionResult> GetAllProduct()
+        => HandleResponse( (await service.GetAllProducts())
+            .Select(c => (ProductDto) c).AsEnumerable());
     [HttpGet("Get/{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ProductDto> GetProductById(Guid id)
-        => await service.GetProductById(id);
+    public async Task<IActionResult> GetProductById(Guid id)
+        => HandleResponse(await service.GetProductById(id));
     [HttpPost("Create")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ProductDto> CreateProduct(ProductDto dto)
-        => await service.Create(dto.Name, dto.Price, dto.Status);
+    public async Task<IActionResult> CreateProduct(ProductDto dto)
+        => HandleResponse(await service.Create(dto.Name, dto.Price, dto.Status));
     
     [HttpPut("Update")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ProductDto> UpdateProduct(ProductDto dto)
-        => await service.Create(dto.Name, dto.Price, dto.Status);
+    public async Task<IActionResult> UpdateProduct(ProductDto dto)
+        => HandleResponse( await service.Create(dto.Name, dto.Price, dto.Status));
 }

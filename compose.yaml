@@ -1,6 +1,0 @@
-﻿services:
-  hexagonal.api:
-    image: hexagonal.api
-    build:
-      context: .
-      dockerfile: src/Hexagonal.Api/Dockerfile
