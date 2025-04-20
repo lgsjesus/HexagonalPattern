@@ -1,0 +1,59 @@
+.edit-container {
+    background-color: #f0f8ff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .edit-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .edit-header h2 {
+    color: #1e90ff;
+  }
+  
+  .edit-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    color: #1565c0;
+  }
+  
+  input {
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #90caf9;
+    border-radius: 4px;
+    background-color: #e3f2fd;
+  }
+  
+  .update-button {
+    background-color: #1e90ff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .update-button:hover {
+    background-color: #0d47a1;
+  }
+  
+  .cancel-button {
+    margin-top: 10px;
+    background-color: #ff4b1e;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  

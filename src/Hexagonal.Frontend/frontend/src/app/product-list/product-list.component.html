@@ -1,0 +1,17 @@
+<div class="product-list-container">
+    <header class="list-header">
+      <h1>Our Products</h1>
+    </header>
+    <ul class="product-list">
+      <li *ngFor="let product of products" class="product-item">
+        <div class="product-info">
+          <span class="product-name">{{ product.name }}</span>
+          <span class="product-details">Price: ${{ product.price }} | Status: {{ product.status }}</span>
+        </div>
+        <div>
+            <button class="edit-button" [routerLink]="['/products', product.id]">Edit</button>
+            <button class="delete-button" (click)="deleteProduct(product.id)">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>

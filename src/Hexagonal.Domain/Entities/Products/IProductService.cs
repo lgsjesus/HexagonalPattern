@@ -11,4 +11,5 @@ public interface IProductService
     Task<Product> Update(Guid id, string name,decimal price,Status status);
     Task Enable(Product product);
     Task Disable(Product product);
+    Task<bool> RemoveProductById(Guid id);
 }

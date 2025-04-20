@@ -23,6 +23,49 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{7695B2E2-41F0-4B3F-8FBD-62BEEC8D1C4E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{207E93E0-F3B6-4FF5-906D-8D9B659CFACF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{D5705FCD-2EBB-4B95-AF24-2D889CBFBD75}"
+	ProjectSection(SolutionItems) = preProject
+		src\Hexagonal.Frontend\frontend\public\favicon.ico = src\Hexagonal.Frontend\frontend\public\favicon.ico
+		src\Hexagonal.Frontend\frontend\src\app\app.component.css = src\Hexagonal.Frontend\frontend\src\app\app.component.css
+		src\Hexagonal.Frontend\frontend\src\app\app.component.html = src\Hexagonal.Frontend\frontend\src\app\app.component.html
+		src\Hexagonal.Frontend\frontend\src\app\app.component.spec.ts = src\Hexagonal.Frontend\frontend\src\app\app.component.spec.ts
+		src\Hexagonal.Frontend\frontend\src\app\app.component.ts = src\Hexagonal.Frontend\frontend\src\app\app.component.ts
+		src\Hexagonal.Frontend\frontend\src\app\app.config.server.ts = src\Hexagonal.Frontend\frontend\src\app\app.config.server.ts
+		src\Hexagonal.Frontend\frontend\src\app\app.config.ts = src\Hexagonal.Frontend\frontend\src\app\app.config.ts
+		src\Hexagonal.Frontend\frontend\src\app\app.routes.server.ts = src\Hexagonal.Frontend\frontend\src\app\app.routes.server.ts
+		src\Hexagonal.Frontend\frontend\src\app\app.routes.ts = src\Hexagonal.Frontend\frontend\src\app\app.routes.ts
+		src\Hexagonal.Frontend\frontend\src\app\product-edit\product-edit.component.css = src\Hexagonal.Frontend\frontend\src\app\product-edit\product-edit.component.css
+		src\Hexagonal.Frontend\frontend\src\app\product-edit\product-edit.component.html = src\Hexagonal.Frontend\frontend\src\app\product-edit\product-edit.component.html
+		src\Hexagonal.Frontend\frontend\src\app\product-edit\product-edit.component.spec.ts = src\Hexagonal.Frontend\frontend\src\app\product-edit\product-edit.component.spec.ts
+		src\Hexagonal.Frontend\frontend\src\app\product-edit\product-edit.component.ts = src\Hexagonal.Frontend\frontend\src\app\product-edit\product-edit.component.ts
+		src\Hexagonal.Frontend\frontend\src\app\product-list\product-list.component.css = src\Hexagonal.Frontend\frontend\src\app\product-list\product-list.component.css
+		src\Hexagonal.Frontend\frontend\src\app\product-list\product-list.component.html = src\Hexagonal.Frontend\frontend\src\app\product-list\product-list.component.html
+		src\Hexagonal.Frontend\frontend\src\app\product-list\product-list.component.spec.ts = src\Hexagonal.Frontend\frontend\src\app\product-list\product-list.component.spec.ts
+		src\Hexagonal.Frontend\frontend\src\app\product-list\product-list.component.ts = src\Hexagonal.Frontend\frontend\src\app\product-list\product-list.component.ts
+		src\Hexagonal.Frontend\frontend\src\app\services\product.service.ts = src\Hexagonal.Frontend\frontend\src\app\services\product.service.ts
+		src\Hexagonal.Frontend\frontend\src\app\services\toast.service.ts = src\Hexagonal.Frontend\frontend\src\app\services\toast.service.ts
+		src\Hexagonal.Frontend\frontend\src\app\toast\toast.component.css = src\Hexagonal.Frontend\frontend\src\app\toast\toast.component.css
+		src\Hexagonal.Frontend\frontend\src\app\toast\toast.component.html = src\Hexagonal.Frontend\frontend\src\app\toast\toast.component.html
+		src\Hexagonal.Frontend\frontend\src\app\toast\toast.component.spec.ts = src\Hexagonal.Frontend\frontend\src\app\toast\toast.component.spec.ts
+		src\Hexagonal.Frontend\frontend\src\app\toast\toast.component.ts = src\Hexagonal.Frontend\frontend\src\app\toast\toast.component.ts
+		src\Hexagonal.Frontend\frontend\src\index.html = src\Hexagonal.Frontend\frontend\src\index.html
+		src\Hexagonal.Frontend\frontend\src\main.server.ts = src\Hexagonal.Frontend\frontend\src\main.server.ts
+		src\Hexagonal.Frontend\frontend\src\main.ts = src\Hexagonal.Frontend\frontend\src\main.ts
+		src\Hexagonal.Frontend\frontend\src\server.ts = src\Hexagonal.Frontend\frontend\src\server.ts
+		src\Hexagonal.Frontend\frontend\src\styles.css = src\Hexagonal.Frontend\frontend\src\styles.css
+		src\Hexagonal.Frontend\frontend\.editorconfig = src\Hexagonal.Frontend\frontend\.editorconfig
+		src\Hexagonal.Frontend\frontend\.gitignore = src\Hexagonal.Frontend\frontend\.gitignore
+		src\Hexagonal.Frontend\frontend\angular.json = src\Hexagonal.Frontend\frontend\angular.json
+		src\Hexagonal.Frontend\frontend\package.json = src\Hexagonal.Frontend\frontend\package.json
+		src\Hexagonal.Frontend\frontend\package-lock.json = src\Hexagonal.Frontend\frontend\package-lock.json
+		src\Hexagonal.Frontend\frontend\README.md = src\Hexagonal.Frontend\frontend\README.md
+		src\Hexagonal.Frontend\frontend\tsconfig.app.json = src\Hexagonal.Frontend\frontend\tsconfig.app.json
+		src\Hexagonal.Frontend\frontend\tsconfig.json = src\Hexagonal.Frontend\frontend\tsconfig.json
+		src\Hexagonal.Frontend\frontend\tsconfig.spec.json = src\Hexagonal.Frontend\frontend\tsconfig.spec.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,5 +100,9 @@ Global
 		{8601F894-603A-4B19-9A25-C7AD46DC52ED} = {E8464838-3209-48BF-BE80-59EE1B375983}
 		{45B8D4CD-42E1-4E34-AD1D-4E9E3E651469} = {96E991FD-E5BE-4FEC-9010-88C4BA2BB613}
 		{7695B2E2-41F0-4B3F-8FBD-62BEEC8D1C4E} = {96E991FD-E5BE-4FEC-9010-88C4BA2BB613}
+		{96E991FD-E5BE-4FEC-9010-88C4BA2BB613} = {207E93E0-F3B6-4FF5-906D-8D9B659CFACF}
+		{E8464838-3209-48BF-BE80-59EE1B375983} = {207E93E0-F3B6-4FF5-906D-8D9B659CFACF}
+		{D679790C-95B1-45AD-AA42-19F79155E487} = {207E93E0-F3B6-4FF5-906D-8D9B659CFACF}
+		{D5705FCD-2EBB-4B95-AF24-2D889CBFBD75} = {207E93E0-F3B6-4FF5-906D-8D9B659CFACF}
 	EndGlobalSection
 EndGlobal
