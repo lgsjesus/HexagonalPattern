@@ -10,7 +10,7 @@
 
 ###
 
-<p align="left">✨ Creating bugs since 2009<br>📚 I'm currently learning pattern of architecture<br></p>
+<p align="left">✨ Creating bugs since 2009<br>📚 I'm currently learning more about pattern of architecture<br></p>
 
 ###
 
