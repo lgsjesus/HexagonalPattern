@@ -20,6 +20,9 @@ public sealed class ProductRepository(HexagonalDbContext context, IUnitOfWork un
         return await GetById(productId);
     }
 
+    public async Task RemoveProduct(Guid productId)
+    => await DeleteById(productId);
+
     public async Task<Option<ReadOnlyCollection<Product>>> GetAllProduct()
     => await GetAll();
 }

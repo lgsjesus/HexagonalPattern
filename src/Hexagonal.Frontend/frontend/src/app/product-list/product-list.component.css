@@ -1,0 +1,74 @@
+.product-list-container {
+    background-color: #f0f8ff; /* Light blue background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .list-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .list-header h1 {
+    color: #1e90ff; /* Dodger blue */
+    font-size: 2em;
+  }
+  
+  .product-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e0f2f7;
+    transition: background-color 0.3s ease; /* Smooth transition for hover */
+  }
+  
+  .product-item:hover {
+    background-color: #e0f2f7; /* Lighter blue on hover */
+    cursor: pointer; /* Indicate it's clickable */
+  }
+  
+  .product-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .product-name {
+    font-weight: bold;
+    color: #2196f3; /* Blue */
+  }
+  
+  .product-details {
+    color: #64b5f6; /* Light blue */
+    font-size: 0.9em;
+  }
+  
+  .edit-button {
+    background-color: #1e90ff; /* Dodger blue */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-button:hover {
+    background-color: #0d47a1; /* Darker blue on hover */
+  }
+  
+  .delete-button {
+    background-color: #ff4b1e; /* Dodger blue */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }

@@ -7,7 +7,7 @@ namespace Hexagonal.Api.Controllers;
 [Route("api/[controller]")]
 public abstract class ApiBaseController : ControllerBase
 {
-    protected  IActionResult HandleResponse(object? retorno) 
+    protected  IActionResult HandleResponse(object? retorno = null) 
     {
         try
         {

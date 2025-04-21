@@ -1,0 +1,19 @@
+<div class="edit-container">
+    <header class="edit-header">
+      <h2>Edit Product</h2>
+    </header>
+    <div *ngIf="product" class="edit-form">
+      <label for="name">Name:</label>
+      <input id="name" [(ngModel)]="product.name" placeholder="Product Name" />
+  
+      <label for="price">Price:</label>
+      <input id="price" [(ngModel)]="product.price" type="number" placeholder="Product Price" />
+  
+      <label for="status">Status:</label>
+      <input id="status" [(ngModel)]="product.status" type="number" placeholder="Product Status" />
+  
+      <button class="update-button" (click)="updateProduct()">Update</button>      
+      <button class="cancel-button" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+  

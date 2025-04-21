@@ -2,6 +2,7 @@
 using Hexagonal.Domain.Entities.Comums;
 using Hexagonal.Domain.Entities.Products;
 using Hexagonal.Domain.Enums;
+using Optional.Unsafe;
 
 namespace Hexagonal.ProductService;
 
@@ -74,5 +75,11 @@ public sealed class ProductServices(IProductRepository productRepository) : IPro
         }
         throw new UserException( result.Errors.
             Select(c=> c.ErrorMessage).CommAggregate());
+    }
+    public async Task<bool> RemoveProductById(Guid id)
+    {
+        var item = (await productRepository.GetProduct(id)).ValueOrFailure("Product not found");
+        await productRepository.RemoveProduct(item.Id);
+        return true;
     }
 }
